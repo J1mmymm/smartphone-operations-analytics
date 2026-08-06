@@ -1,0 +1,32 @@
+/// MySQL import table: dim_region
+table dim_region
+	lineageTag: 5dc49bf2-72e0-49e0-b5b4-16ec19e25d3a
+
+	column region_key
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 82263283-9687-4110-bf6c-57cf3adc6d2a
+		summarizeBy: none
+		sourceColumn: region_key
+
+	column region_name
+		dataType: string
+		lineageTag: 91516853-aa53-4565-8a12-bcfd321e99cd
+		summarizeBy: none
+		sourceColumn: region_name
+
+	column region_tier
+		dataType: string
+		lineageTag: c8f217c0-43d9-439f-aa00-096f4072e499
+		summarizeBy: none
+		sourceColumn: region_tier
+
+	partition dim_region = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `region_key`, `region_name`, `region_tier` FROM `dim_region`"])
+				in
+					Source
+

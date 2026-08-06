@@ -1,0 +1,128 @@
+/// Central DAX measure table
+table _Measures
+	lineageTag: 7a40141e-5ffe-456e-902b-c2b9570cba4a
+
+	/// 销售订单净额；与经营流水中的销售回款控制总额对账。
+	measure 'Total Sales' = SUM(fact_sales_order[net_sales])
+		formatString: ¥#,##0
+		lineageTag: a8149e18-a0f8-469e-bf5e-235a0dba8794
+
+	/// 净销售额减销售成本。
+	measure 'Gross Profit' = SUM(fact_sales_order[gross_profit])
+		formatString: ¥#,##0
+		lineageTag: f87f5e8c-3fb7-42da-93ea-567fdd2c1f31
+
+	/// 毛利额占净销售额的比例。
+	measure 'Gross Margin' = DIVIDE([Gross Profit], [Total Sales])
+		formatString: 0.00%
+		lineageTag: 84aed026-e0d8-43f0-b788-9b386d330eee
+
+	/// 已发货订单的销售成本。
+	measure COGS = SUM(fact_sales_order[cogs])
+		formatString: ¥#,##0
+		lineageTag: 1aa56ce2-c423-416c-8b44-108d7934e2a1
+
+	/// 客户下单数量。
+	measure 'Ordered Units' = SUM(fact_sales_order[ordered_qty])
+		formatString: #,##0
+		lineageTag: 25e6599e-1ee1-4862-8283-495781e8e996
+
+	/// 实际发货数量。
+	measure 'Shipped Units' = SUM(fact_sales_order[shipped_qty])
+		formatString: #,##0
+		lineageTag: 92bcb284-d337-4434-8195-09c80ae6bbfc
+
+	/// 发货数量除以下单数量。
+	measure 'Fill Rate' = DIVIDE([Shipped Units], [Ordered Units])
+		formatString: 0.00%
+		lineageTag: 86adebc1-44fe-4183-b1e7-776e539e20ea
+
+	/// 按订单口径计算的承诺期内交付率。
+	measure 'On-time Order Rate' = DIVIDE(SUM(fact_sales_order[on_time_flag]), COUNTROWS(fact_sales_order))
+		formatString: 0.00%
+		lineageTag: bbb37eb5-4b5f-4a78-98c5-770dff051ed0
+
+	/// 订单从下单到发货的平均天数。
+	measure 'Average Delivery Days' = AVERAGE(fact_sales_order[delivery_days])
+		formatString: 0.0
+		lineageTag: 119cdbd4-38a8-4b11-b558-4828c50fd248
+
+	/// 净销售额除以发货数量。
+	measure 'Average Selling Price' = DIVIDE([Total Sales], [Shipped Units])
+		formatString: ¥#,##0
+		lineageTag: 802a65df-3333-4810-b812-2df4bd9230f0
+
+	/// 良品与不良品合计的实际投产数量。
+	measure 'Produced Units' = SUM(fact_production[actual_good_units]) + SUM(fact_production[defect_units])
+		formatString: #,##0
+		lineageTag: ec73d74e-e54f-4795-8a31-c4fefdcf544f
+
+	/// 可用产能分配数量。
+	measure 'Capacity Units' = SUM(fact_production[capacity_allocated_units])
+		formatString: #,##0
+		lineageTag: 8253e2c0-545b-4a4a-9997-6e99dda20c27
+
+	/// 实际投产数量除以分配产能。
+	measure 'Capacity Utilization' = DIVIDE([Produced Units], [Capacity Units])
+		formatString: 0.00%
+		lineageTag: 60d54ef8-a5bb-468d-a347-04886491391f
+
+	/// 当前筛选范围最后一个月的期末库存快照。
+	measure 'Ending Inventory' = VAR LastMonth = MAX(dim_date[date_key]) RETURN CALCULATE(SUM(fact_inventory[ending_inventory_qty]), dim_date[date_key] = LastMonth)
+		formatString: #,##0
+		lineageTag: 6216de68-4937-4ba4-8919-5bd856cf54f4
+
+	/// 当前筛选范围最后一个月的库存金额快照。
+	measure 'Inventory Value' = VAR LastMonth = MAX(dim_date[date_key]) RETURN CALCULATE(SUM(fact_inventory[inventory_value]), dim_date[date_key] = LastMonth)
+		formatString: ¥#,##0
+		lineageTag: c7b5576f-542b-4304-b308-67e0f739a931
+
+	/// 当前筛选范围最后一个月、所选SKU的平均库存覆盖天数。
+	measure 'Days of Supply' = VAR LastMonth = MAX(dim_date[date_key]) RETURN CALCULATE(AVERAGE(fact_inventory[days_of_supply]), dim_date[date_key] = LastMonth)
+		formatString: 0.0
+		lineageTag: 82f531a8-95a6-40bc-aa3f-be5994abde35
+
+	/// 需求超过可供货量形成的缺货数量。
+	measure 'Stockout Units' = SUM(fact_inventory[stockout_qty])
+		formatString: #,##0
+		lineageTag: 96c03b03-52b9-4cb7-9de9-a9d5672043e9
+
+	/// 销售成本除以月末库存金额平均值。
+	measure 'Inventory Turnover' = DIVIDE([COGS], AVERAGEX(VALUES(dim_date[date_key]), CALCULATE(SUM(fact_inventory[inventory_value]))))
+		formatString: 0.00x
+		lineageTag: 8dbd1aed-f25d-45b3-bbb8-3051622dc4bf
+
+	/// 现金流入金额。
+	measure 'Cash Inflow' = CALCULATE(SUM(fact_cashflow[amount]), fact_cashflow[flow_direction] = "Inflow")
+		formatString: ¥#,##0
+		lineageTag: 4b1ec950-10e8-4911-9d7c-ec1c644e8a4b
+
+	/// 现金流出金额，按正数展示。
+	measure 'Cash Outflow' = CALCULATE(SUM(fact_cashflow[amount]), fact_cashflow[flow_direction] = "Outflow")
+		formatString: ¥#,##0
+		lineageTag: edce0ad5-f298-466b-9436-824c5a577bc4
+
+	/// 现金流入减现金流出。
+	measure 'Net Cashflow' = SUM(fact_cashflow[signed_amount])
+		formatString: ¥#,##0;[Red]-¥#,##0
+		lineageTag: f00ef080-fe2d-41eb-b785-09e73f9c1bfb
+
+	/// 从首月累计至当前筛选末月的现金余额。
+	measure 'Closing Cash' = VAR LastMonth = MAX(dim_date[date_key]) RETURN CALCULATE([Net Cashflow], FILTER(ALL(dim_date), dim_date[date_key] <= LastMonth))
+		formatString: ¥#,##0
+		lineageTag: 67e0de2d-c568-4650-adda-5fb48b7ad8c3
+
+	/// 当前经营季度相对上一经营季度的销售额增速。
+	measure 'Sales QoQ' = VAR CurrentQuarter = MAX(dim_date[quarter_seq]) VAR PreviousSales = CALCULATE([Total Sales], FILTER(ALL(dim_date), dim_date[quarter_seq] = CurrentQuarter - 1)) RETURN DIVIDE([Total Sales] - PreviousSales, PreviousSales)
+		formatString: 0.00%
+		lineageTag: 5073ec70-08c6-41b6-bcf7-bc35a8ef13fc
+
+	column Dummy
+		lineageTag: 0fc56ae2-1120-47d3-b0f2-cf127e70108e
+		isNameInferred
+		sourceColumn: [Dummy]
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW("Dummy", BLANK())
+

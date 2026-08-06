@@ -1,0 +1,25 @@
+model Model
+	culture: zh-CN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["dim_date","dim_product","dim_channel","dim_region","fact_sales_order","fact_production","fact_inventory","fact_cashflow","MySQL_Server","MySQL_Database"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_date
+ref table dim_product
+ref table dim_channel
+ref table dim_region
+ref table fact_sales_order
+ref table fact_production
+ref table fact_inventory
+ref table fact_cashflow
+ref table _Measures
+

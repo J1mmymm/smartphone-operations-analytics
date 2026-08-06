@@ -1,0 +1,39 @@
+/// MySQL import table: dim_channel
+table dim_channel
+	lineageTag: bfac44aa-4c5a-4af8-a05d-2dafb7f82d87
+
+	column channel_key
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 83f9f782-e417-48bd-b9a4-1736a2e7da8a
+		summarizeBy: none
+		sourceColumn: channel_key
+
+	column channel_name
+		dataType: string
+		lineageTag: 9c68e74b-d9e8-4b5f-9d4b-ff3426f397d6
+		summarizeBy: none
+		sourceColumn: channel_name
+
+	column channel_type
+		dataType: string
+		lineageTag: 5475858a-55fe-42c4-9c8e-23b408df9e37
+		summarizeBy: none
+		sourceColumn: channel_type
+
+	column price_factor
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 31b46669-c2e7-40b5-b33a-2b52b4341c95
+		summarizeBy: none
+		sourceColumn: price_factor
+
+	partition dim_channel = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `channel_key`, `channel_name`, `channel_type`, `price_factor` FROM `dim_channel`"])
+				in
+					Source
+

@@ -1,0 +1,4 @@
+channel_key,channel_name,channel_type,price_factor
+1,线上直营,Direct,1.0
+2,线下零售,Retail,0.97
+3,区域经销,Distributor,0.91

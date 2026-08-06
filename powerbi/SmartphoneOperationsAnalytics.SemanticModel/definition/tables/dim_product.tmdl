@@ -1,0 +1,69 @@
+/// MySQL import table: dim_product
+table dim_product
+	lineageTag: 389e134b-a3ee-4f92-8fd2-3d2642d35060
+
+	column product_key
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 0fde0eac-e609-46e8-8779-84ea3444d174
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column sku
+		dataType: string
+		lineageTag: 074390bc-ef2c-40b2-8e90-728200b1d11e
+		summarizeBy: none
+		sourceColumn: sku
+
+	column product_name
+		dataType: string
+		lineageTag: d9dc7fcd-0947-4271-a206-3c19d2838d3d
+		summarizeBy: none
+		sourceColumn: product_name
+
+	column product_family
+		dataType: string
+		lineageTag: fe663bee-617f-4162-a728-bc27b5f1ac2a
+		summarizeBy: none
+		sourceColumn: product_family
+
+	column positioning
+		dataType: string
+		lineageTag: caa93142-dc35-47be-95dd-38a7c630bb47
+		summarizeBy: none
+		sourceColumn: positioning
+
+	column list_price
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 1e427890-f129-4d7e-a250-5bf3cf3ffc12
+		summarizeBy: sum
+		sourceColumn: list_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column standard_unit_cost
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 6187469d-e3a6-4ab3-833b-8264540995d7
+		summarizeBy: sum
+		sourceColumn: standard_unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column launch_month_key
+		dataType: int64
+		isHidden
+		lineageTag: 2ab8cf6d-bfc2-469e-a1be-164c34725353
+		summarizeBy: none
+		sourceColumn: launch_month_key
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `product_key`, `sku`, `product_name`, `product_family`, `positioning`, `list_price`, `standard_unit_cost`, `launch_month_key` FROM `dim_product`"])
+				in
+					Source
+

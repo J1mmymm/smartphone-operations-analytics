@@ -1,0 +1,36 @@
+relationship 08cd38e2-fc70-5d29-9084-7885c45535d9
+	fromColumn: fact_sales_order.order_date_key
+	toColumn: dim_date.date_key
+
+relationship 337f59bb-2ea4-5ee2-b76c-b9f5d3f62d1d
+	fromColumn: fact_sales_order.product_key
+	toColumn: dim_product.product_key
+
+relationship 484339ac-fae4-5c74-91a3-37254c0456f5
+	fromColumn: fact_sales_order.channel_key
+	toColumn: dim_channel.channel_key
+
+relationship b50198c1-603e-5612-a4e8-8328a508386a
+	fromColumn: fact_sales_order.region_key
+	toColumn: dim_region.region_key
+
+relationship 7c07e795-dc12-51f4-9de6-c8292b5be5c0
+	fromColumn: fact_production.month_key
+	toColumn: dim_date.date_key
+
+relationship 1926c971-f11a-588a-8b80-623e80e2c755
+	fromColumn: fact_production.product_key
+	toColumn: dim_product.product_key
+
+relationship fff8021a-2173-5ffb-bfdb-8f34c329fbcc
+	fromColumn: fact_inventory.month_key
+	toColumn: dim_date.date_key
+
+relationship 9d11ff6b-4cd0-5dc1-9fd5-311da9ef999e
+	fromColumn: fact_inventory.product_key
+	toColumn: dim_product.product_key
+
+relationship f9d407b8-a6cf-5a59-82c2-32ce46a6954d
+	fromColumn: fact_cashflow.date_key
+	toColumn: dim_date.date_key
+

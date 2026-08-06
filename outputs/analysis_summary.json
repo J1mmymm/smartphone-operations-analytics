@@ -1,0 +1,18 @@
+{
+  "total_sales": 32870200.0,
+  "gross_margin": 0.2823,
+  "fill_rate": 1.0,
+  "on_time_order_rate": 0.9205,
+  "top_channel": "区域经销",
+  "top_channel_share": 0.4929,
+  "top_region": "华东",
+  "top_region_share": 0.3413,
+  "L_family_share": 0.8198,
+  "q13_fill_rate": 1.0,
+  "q14_fill_rate": 1.0,
+  "q13_capacity_utilization": 0.9533,
+  "q14_capacity_utilization": 0.914,
+  "minimum_quarter_closing_cash": 3223,
+  "minimum_cash_quarter": "Q13",
+  "q14_sales_growth": 0.3333
+}

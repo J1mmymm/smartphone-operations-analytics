@@ -1,0 +1,10 @@
+expression MySQL_Server = "127.0.0.1:3306" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6551df81-d7fe-4c1f-952f-7891686afc52
+
+	annotation PBI_ResultType = Text
+
+expression MySQL_Database = "nanhu_mobile_analytics" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: a2c3c14e-6986-4bfe-b4b0-e01ad7dba19c
+
+	annotation PBI_ResultType = Text
+

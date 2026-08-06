@@ -1,0 +1,14 @@
+check,status,actual,expected
+date_rows,PASS,42,42
+date_key_unique,PASS,42,42
+order_id_unique,PASS,327,327
+positive_order_values,PASS,all valid,all valid
+shipment_not_above_order,PASS,all valid,all valid
+sales_total,PASS,32870200,32870200
+L_family_total,PASS,26948200,26948200
+H_family_total,PASS,5922000,5922000
+cash_inflow_total,PASS,50130681,50130681
+cash_outflow_total,PASS,49777407,49777407
+ending_cash,PASS,353274,353274
+quarter_cash_reconciliation,PASS,14/14,14/14
+production_inventory_balance,PASS,all valid,all valid

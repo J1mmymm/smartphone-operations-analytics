@@ -1,0 +1,74 @@
+/// MySQL import table: dim_date
+table dim_date
+	lineageTag: 72a8998b-9375-4b21-9385-ba019c37dd11
+
+	column date_key
+		dataType: int64
+		isHidden
+		isKey
+		lineageTag: 4664c943-5ad1-436c-8c4f-515c6eb830fc
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column month_start
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: f316a6ab-2554-4e61-8c9e-8bc982cc3206
+		summarizeBy: none
+		sourceColumn: month_start
+
+	column year
+		dataType: int64
+		lineageTag: e0818197-724f-4357-9c55-90ec3a3bb9a3
+		summarizeBy: none
+		sourceColumn: year
+
+	column month_number
+		dataType: int64
+		isHidden
+		lineageTag: c87da50a-d0f8-4379-8c98-21b216a909b0
+		summarizeBy: none
+		sourceColumn: month_number
+
+	column month_label
+		dataType: string
+		lineageTag: 8f27a0a8-044e-49e1-9cbe-494f57ba1c95
+		summarizeBy: none
+		sourceColumn: month_label
+		sortByColumn: date_key
+
+	column quarter_seq
+		dataType: int64
+		isHidden
+		lineageTag: 42bd144f-a6ca-4093-8c1c-d8a7642294e2
+		summarizeBy: none
+		sourceColumn: quarter_seq
+
+	column business_quarter
+		dataType: string
+		lineageTag: 8d074cc2-1e55-4ae5-a95e-4934553d13b7
+		summarizeBy: none
+		sourceColumn: business_quarter
+		sortByColumn: quarter_seq
+
+	column year_quarter
+		dataType: string
+		lineageTag: bd865398-ff78-4b45-9a1b-0b114109c60c
+		summarizeBy: none
+		sourceColumn: year_quarter
+		sortByColumn: quarter_seq
+
+	column month_in_quarter
+		dataType: int64
+		lineageTag: 6e3a7a5c-a4c8-4955-a0fb-cc254de95930
+		summarizeBy: none
+		sourceColumn: month_in_quarter
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `date_key`, `month_start`, `year`, `month_number`, `month_label`, `quarter_seq`, `business_quarter`, `year_quarter`, `month_in_quarter` FROM `dim_date`"])
+				in
+					Source
+

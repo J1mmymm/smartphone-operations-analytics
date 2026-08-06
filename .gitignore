@@ -1,0 +1,34 @@
+# Local credentials and machine settings
+.env
+.env.*
+*.mylogin.cnf
+*.vault
+connections.json
+
+# Build/runtime caches
+__pycache__/
+*.py[cod]
+node_modules/
+work/
+output/
+*.tmp
+*.log
+*.inspect.ndjson
+outputs/019fd325-7c3c-7eb1-aaf5-c348d37fe45a/
+docs/powerbi_pages/
+docs/powerbi_pages_final/
+
+# Power BI local cache folders
+**/.pbi/
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/*.lock
+
+# Office temporary files
+~$*.xlsx
+~$*.pbix
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

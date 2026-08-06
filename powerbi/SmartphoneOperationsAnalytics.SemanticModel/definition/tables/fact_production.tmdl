@@ -1,0 +1,77 @@
+/// MySQL import table: fact_production
+table fact_production
+	lineageTag: 3804bdb8-85d0-48da-a48c-dc13d7c33d58
+
+	column month_key
+		dataType: int64
+		isHidden
+		lineageTag: 19f5f03e-e70e-4102-89dd-dc0192f72260
+		summarizeBy: none
+		sourceColumn: month_key
+
+	column product_key
+		dataType: int64
+		isHidden
+		lineageTag: e9b24dac-7d76-4fb4-9fa6-ea4bc667cabd
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column planned_units
+		dataType: int64
+		lineageTag: c6b461b1-f621-4dcb-9625-050fc1363b29
+		summarizeBy: none
+		sourceColumn: planned_units
+
+	column actual_good_units
+		dataType: int64
+		lineageTag: afe22b3d-6cf6-4ddf-9d04-b6e4bc74c3c2
+		summarizeBy: none
+		sourceColumn: actual_good_units
+
+	column defect_units
+		dataType: int64
+		lineageTag: 6841a696-c99b-43c0-a12b-53312415be63
+		summarizeBy: none
+		sourceColumn: defect_units
+
+	column capacity_allocated_units
+		dataType: int64
+		lineageTag: b8825454-71ff-4ff5-8fe4-4e483dec72ec
+		summarizeBy: none
+		sourceColumn: capacity_allocated_units
+
+	column downtime_hours
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 3fd0e12c-c1b4-4ef3-a76e-b397df52667f
+		summarizeBy: sum
+		sourceColumn: downtime_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column overtime_hours
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 4561bb91-4bf9-4a35-a5d0-f39f7bfd43cf
+		summarizeBy: sum
+		sourceColumn: overtime_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacity_utilization
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 33672831-054e-4e9b-b83f-2b46f4487971
+		summarizeBy: sum
+		sourceColumn: capacity_utilization
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_production = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `month_key`, `product_key`, `planned_units`, `actual_good_units`, `defect_units`, `capacity_allocated_units`, `downtime_hours`, `overtime_hours`, `capacity_utilization` FROM `fact_production`"])
+				in
+					Source
+

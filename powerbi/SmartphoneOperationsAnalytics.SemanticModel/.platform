@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Smartphone Operations Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ea077d8c-c009-51ae-bc1b-55b8231b9a58"
+  }
+}

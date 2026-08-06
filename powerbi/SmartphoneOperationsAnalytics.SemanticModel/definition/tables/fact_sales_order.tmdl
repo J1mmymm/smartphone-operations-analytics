@@ -1,0 +1,177 @@
+/// MySQL import table: fact_sales_order
+table fact_sales_order
+	lineageTag: b1bf8cf1-8060-4592-a54f-757595f8ce3e
+
+	column order_id
+		dataType: string
+		isKey
+		lineageTag: f277afdc-74d9-4d21-b86b-500c9fa6be3f
+		summarizeBy: none
+		sourceColumn: order_id
+
+	column order_date_key
+		dataType: int64
+		isHidden
+		lineageTag: 20c12f97-aece-43c8-b48f-583e40092db6
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: e1de2f28-b01f-434d-a6fe-4a4823cb0751
+		summarizeBy: none
+		sourceColumn: order_date
+
+	column promised_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c523348e-fade-4414-98ed-2d5da10da77f
+		summarizeBy: none
+		sourceColumn: promised_date
+
+	column shipped_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 4629db73-bb8d-4ed6-bcca-62674bcce61f
+		summarizeBy: none
+		sourceColumn: shipped_date
+
+	column product_key
+		dataType: int64
+		isHidden
+		lineageTag: e337b112-f921-4b07-ac6d-ccb4a136c732
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column channel_key
+		dataType: int64
+		isHidden
+		lineageTag: 79590cb8-a87c-4912-b348-616d0a4e2687
+		summarizeBy: none
+		sourceColumn: channel_key
+
+	column region_key
+		dataType: int64
+		isHidden
+		lineageTag: 34d18dff-2a3e-49a4-bdec-6bde590ffe32
+		summarizeBy: none
+		sourceColumn: region_key
+
+	column ordered_qty
+		dataType: int64
+		lineageTag: c91a5792-9a4f-459d-bf1e-e0de580abee4
+		summarizeBy: none
+		sourceColumn: ordered_qty
+
+	column shipped_qty
+		dataType: int64
+		lineageTag: 5a469c32-eb43-495c-9385-7f839c8feb64
+		summarizeBy: none
+		sourceColumn: shipped_qty
+
+	column unit_price
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 8a91edbd-abfe-41be-a7ce-e40481324a7c
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_sales
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: ad312a01-9070-492e-bca0-29d8059adce7
+		summarizeBy: sum
+		sourceColumn: gross_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_amount
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 53a7bf6b-3e3b-407d-a632-2f41130c7d2b
+		summarizeBy: sum
+		sourceColumn: discount_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_sales
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 7631db14-c0e3-4927-b0ef-234167bc3c8f
+		summarizeBy: sum
+		sourceColumn: net_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_cost
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 8a5e2f4c-33d8-407b-aff4-aef2350484a6
+		summarizeBy: sum
+		sourceColumn: unit_cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column cogs
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 2a78052e-cc8a-4053-9e5e-e2c6ab511417
+		summarizeBy: sum
+		sourceColumn: cogs
+
+		annotation SummarizationSetBy = Automatic
+
+	column gross_profit
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 9a9060e6-19b2-4b07-b9df-5d1aee04597b
+		summarizeBy: sum
+		sourceColumn: gross_profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column delivery_days
+		dataType: int64
+		lineageTag: 005083e3-bdf8-40ad-9f79-510734e16268
+		summarizeBy: none
+		sourceColumn: delivery_days
+
+	column on_time_flag
+		dataType: int64
+		isHidden
+		lineageTag: 36f3fa0b-b496-46f7-b64e-b5b0ce43191a
+		summarizeBy: none
+		sourceColumn: on_time_flag
+
+	column full_fill_flag
+		dataType: int64
+		isHidden
+		lineageTag: 2c1434ee-5cfd-4e4f-9ef5-22cffe621b06
+		summarizeBy: none
+		sourceColumn: full_fill_flag
+
+	column order_status
+		dataType: string
+		lineageTag: 9d4fb735-1ac1-4315-8329-cb494a0a1855
+		summarizeBy: none
+		sourceColumn: order_status
+
+	column payment_term_days
+		dataType: int64
+		lineageTag: 56b4bc4b-69f9-4911-b89c-371dea265d62
+		summarizeBy: none
+		sourceColumn: payment_term_days
+
+	partition fact_sales_order = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `order_id`, `order_date_key`, `order_date`, `promised_date`, `shipped_date`, `product_key`, `channel_key`, `region_key`, `ordered_qty`, `shipped_qty`, `unit_price`, `gross_sales`, `discount_amount`, `net_sales`, `unit_cost`, `cogs`, `gross_profit`, `delivery_days`, `on_time_flag`, `full_fill_flag`, `order_status`, `payment_term_days` FROM `fact_sales_order`"])
+				in
+					Source
+
+	annotation PBI_ResultType = Table
+

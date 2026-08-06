@@ -1,0 +1,82 @@
+/// MySQL import table: fact_cashflow
+table fact_cashflow
+	lineageTag: ca5eca4e-7ec6-4aa7-aa4a-88011bfc855b
+
+	column cashflow_id
+		dataType: string
+		isKey
+		lineageTag: 966ff78a-8968-4fa6-896f-eaa1c7a62bb0
+		summarizeBy: none
+		sourceColumn: cashflow_id
+
+	column date_key
+		dataType: int64
+		isHidden
+		lineageTag: 483dfe71-68a5-4044-ace3-cef487f7d38e
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column transaction_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 8429e288-ce97-443e-bf1b-a937c160dbbd
+		summarizeBy: none
+		sourceColumn: transaction_date
+
+	column quarter_seq
+		dataType: int64
+		isHidden
+		lineageTag: 8ee0471b-033b-46cc-9407-bb845f983d47
+		summarizeBy: none
+		sourceColumn: quarter_seq
+
+	column flow_direction
+		dataType: string
+		lineageTag: fcbb69d4-f553-4eaf-a3b7-cc55b7095756
+		summarizeBy: none
+		sourceColumn: flow_direction
+
+	column flow_category
+		dataType: string
+		lineageTag: 69725a0f-04f2-49c2-bd00-1c3ae07ab505
+		summarizeBy: none
+		sourceColumn: flow_category
+
+	column flow_category_cn
+		dataType: string
+		lineageTag: 4b8456fe-dab4-403f-bc9c-07f99cfbbf13
+		summarizeBy: none
+		sourceColumn: flow_category_cn
+
+	column amount
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: 79e3c431-109e-4507-8b6c-6231fd5fbb8d
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column signed_amount
+		dataType: double
+		formatString: ¥#,##0.00;[Red]-¥#,##0.00
+		lineageTag: de1aabef-a82e-4bd9-95b2-4cde0df7f4a3
+		summarizeBy: sum
+		sourceColumn: signed_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column control_source
+		dataType: string
+		lineageTag: a2908629-ba87-4d83-aeea-65e8e56f2298
+		summarizeBy: none
+		sourceColumn: control_source
+
+	partition fact_cashflow = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `cashflow_id`, `date_key`, `transaction_date`, `quarter_seq`, `flow_direction`, `flow_category`, `flow_category_cn`, `amount`, `signed_amount`, `control_source` FROM `fact_cashflow`"])
+				in
+					Source
+

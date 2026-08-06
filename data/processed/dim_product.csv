@@ -1,0 +1,5 @@
+product_key,sku,product_name,product_family,positioning,list_price,standard_unit_cost,launch_month_key
+101,L1,N-Lite,L,大众基础款,2699,1820,202204
+102,L2,N-Plus,L,大众升级款,3299,2230,202204
+201,H1,N-Pro,H,高端旗舰款,4599,3150,202312
+202,H2,N-Ultra,H,高端影像款,5499,3820,202312

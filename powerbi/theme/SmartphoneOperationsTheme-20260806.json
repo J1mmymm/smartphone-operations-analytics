@@ -1,0 +1,99 @@
+{
+  "name": "SmartphoneOperationsTheme-20260806.json",
+  "dataColors": [
+    "#F56600",
+    "#3D3D3D",
+    "#5B8FF9",
+    "#2D7D46",
+    "#D64545",
+    "#FFB27D",
+    "#7A7A7A"
+  ],
+  "good": "#2D7D46",
+  "neutral": "#D9A400",
+  "bad": "#D64545",
+  "maximum": "#F56600",
+  "center": "#FFB27D",
+  "minimum": "#FFF2E8",
+  "null": "#C8C8C8",
+  "firstLevelElements": "#242424",
+  "secondLevelElements": "#686868",
+  "thirdLevelElements": "#E8E8E8",
+  "fourthLevelElements": "#A6A6A6",
+  "background": "#FFFFFF",
+  "secondaryBackground": "#F5F5F5",
+  "tableAccent": "#F56600",
+  "textClasses": {
+    "callout": {
+      "fontSize": 24,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#F56600"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#242424"
+    },
+    "header": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#242424"
+    },
+    "label": {
+      "fontSize": 9,
+      "fontFace": "Segoe UI",
+      "color": "#242424"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E6E6E6"
+              }
+            },
+            "radius": 6,
+            "width": 1
+          }
+        ],
+        "title": [
+          {
+            "show": true,
+            "fontFamily": "Segoe UI Semibold",
+            "fontSize": 12,
+            "fontColor": {
+              "solid": {
+                "color": "#242424"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "columnHeaders": [
+          {
+            "autoSizeColumnWidth": true,
+            "columnAdjustment": "growToFit"
+          }
+        ]
+      }
+    }
+  }
+}

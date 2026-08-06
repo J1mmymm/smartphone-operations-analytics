@@ -1,0 +1,92 @@
+/// MySQL import table: fact_inventory
+table fact_inventory
+	lineageTag: 8b5ec5be-4845-4013-9944-57698680ea7b
+
+	column month_key
+		dataType: int64
+		isHidden
+		lineageTag: e9df9739-14a2-4450-82bc-ef5cbb5a4a4e
+		summarizeBy: none
+		sourceColumn: month_key
+
+	column product_key
+		dataType: int64
+		isHidden
+		lineageTag: b4a5ea37-282c-444e-8716-7f1431c4adda
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column beginning_inventory_qty
+		dataType: int64
+		lineageTag: 2521caa4-cd59-4d3a-9d5f-bff9cfa42681
+		summarizeBy: none
+		sourceColumn: beginning_inventory_qty
+
+	column production_receipts_qty
+		dataType: int64
+		lineageTag: c1daf305-fc3a-4427-ae74-d3d14bf67937
+		summarizeBy: none
+		sourceColumn: production_receipts_qty
+
+	column demand_qty
+		dataType: int64
+		lineageTag: 87116e8d-a9dd-4017-bc04-4e598979efac
+		summarizeBy: none
+		sourceColumn: demand_qty
+
+	column shipped_qty
+		dataType: int64
+		lineageTag: 73d0802b-0e8d-40bf-98d0-208e9fe1c5fa
+		summarizeBy: none
+		sourceColumn: shipped_qty
+
+	column ending_inventory_qty
+		dataType: int64
+		lineageTag: de21ba5d-03b0-4c7b-9c24-ba36c3ee984c
+		summarizeBy: none
+		sourceColumn: ending_inventory_qty
+
+	column stockout_qty
+		dataType: int64
+		lineageTag: 5ec5fa92-3a29-4eaa-aebd-5ca44cdf0423
+		summarizeBy: none
+		sourceColumn: stockout_qty
+
+	column inventory_value
+		dataType: double
+		formatString: ¥#,##0.00
+		lineageTag: ba7269ad-70e7-4c96-b5b2-a41d6e004181
+		summarizeBy: sum
+		sourceColumn: inventory_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column warehouse_capacity_qty
+		dataType: int64
+		lineageTag: fef56fa0-7c8c-4f6f-be47-5477c37538c3
+		summarizeBy: none
+		sourceColumn: warehouse_capacity_qty
+
+	column days_of_supply
+		dataType: double
+		formatString: #,##0.0
+		lineageTag: 2ca82e42-49a2-4ac2-a68b-c85a39f7618c
+		summarizeBy: sum
+		sourceColumn: days_of_supply
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_status
+		dataType: string
+		lineageTag: e043d73d-5747-4496-9c42-89114ab324da
+		summarizeBy: none
+		sourceColumn: inventory_status
+
+	partition fact_inventory = m
+		mode: import
+		source =
+				let
+					Source = MySQL.Database(MySQL_Server, MySQL_Database, [Query="SELECT `month_key`, `product_key`, `beginning_inventory_qty`, `production_receipts_qty`, `demand_qty`, `shipped_qty`, `ending_inventory_qty`, `stockout_qty`, `inventory_value`, `warehouse_capacity_qty`, `days_of_supply`, `inventory_status` FROM `fact_inventory`"])
+				in
+					Source
+

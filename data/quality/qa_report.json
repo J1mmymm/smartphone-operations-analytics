@@ -1,0 +1,131 @@
+{
+  "seed": 20260806,
+  "source_description": "基于专业见习经营流水整理并补全的项目数据",
+  "coverage": {
+    "start_month": "2022-01",
+    "end_month": "2025-06",
+    "months": 42,
+    "quarters": 14
+  },
+  "row_counts": {
+    "dim_date": 42,
+    "dim_product": 4,
+    "dim_channel": 3,
+    "dim_region": 4,
+    "fact_sales_order": 327,
+    "fact_production": 168,
+    "fact_inventory": 168,
+    "fact_cashflow": 237
+  },
+  "checks": [
+    {
+      "check": "date_rows",
+      "status": "PASS",
+      "actual": 42,
+      "expected": 42
+    },
+    {
+      "check": "date_key_unique",
+      "status": "PASS",
+      "actual": 42,
+      "expected": 42
+    },
+    {
+      "check": "order_id_unique",
+      "status": "PASS",
+      "actual": 327,
+      "expected": 327
+    },
+    {
+      "check": "positive_order_values",
+      "status": "PASS",
+      "actual": "all valid",
+      "expected": "all valid"
+    },
+    {
+      "check": "shipment_not_above_order",
+      "status": "PASS",
+      "actual": "all valid",
+      "expected": "all valid"
+    },
+    {
+      "check": "sales_total",
+      "status": "PASS",
+      "actual": 32870200,
+      "expected": 32870200
+    },
+    {
+      "check": "L_family_total",
+      "status": "PASS",
+      "actual": 26948200,
+      "expected": 26948200
+    },
+    {
+      "check": "H_family_total",
+      "status": "PASS",
+      "actual": 5922000,
+      "expected": 5922000
+    },
+    {
+      "check": "cash_inflow_total",
+      "status": "PASS",
+      "actual": 50130681,
+      "expected": 50130681
+    },
+    {
+      "check": "cash_outflow_total",
+      "status": "PASS",
+      "actual": 49777407,
+      "expected": 49777407
+    },
+    {
+      "check": "ending_cash",
+      "status": "PASS",
+      "actual": 353274,
+      "expected": 353274
+    },
+    {
+      "check": "quarter_cash_reconciliation",
+      "status": "PASS",
+      "actual": "14/14",
+      "expected": "14/14"
+    },
+    {
+      "check": "production_inventory_balance",
+      "status": "PASS",
+      "actual": "all valid",
+      "expected": "all valid"
+    }
+  ],
+  "overall_status": "PASS",
+  "findings": {
+    "total_sales": 32870200.0,
+    "gross_margin": 0.2823,
+    "fill_rate": 1.0,
+    "on_time_order_rate": 0.9205,
+    "top_channel": "区域经销",
+    "top_channel_share": 0.4929,
+    "top_region": "华东",
+    "top_region_share": 0.3413,
+    "L_family_share": 0.8198,
+    "q13_fill_rate": 1.0,
+    "q14_fill_rate": 1.0,
+    "q13_capacity_utilization": 0.9533,
+    "q14_capacity_utilization": 0.914,
+    "minimum_quarter_closing_cash": 3223,
+    "minimum_cash_quarter": "Q13",
+    "q14_sales_growth": 0.3333
+  },
+  "file_hashes": {
+    "dim_channel.csv": "fdd6eb4abdd8dbc355e0697d1f063a208a7afbe8d51c585022e0c76aad8129a1",
+    "dim_date.csv": "d9e0ac3de1653001c8c9c963955fe562c58c8d0170862b9452a8642cd5dc5f6d",
+    "dim_product.csv": "1daf24bca6455a5a7586a3cdb475b316903d3d0449cdb26757d19f75c4317c7f",
+    "dim_region.csv": "31a600a61204b252f1da7f0c3ddf9266562f3453d930452303dac9e7b9a54dde",
+    "fact_cashflow.csv": "5819c7a01f00337fc4ac92545bfc056515cf9d4f3d6d4ee95d8e8945a89ed546",
+    "fact_inventory.csv": "2744798affb9b7324d36fa648f33f366290df47a6a7e3932a85d3c444b11302c",
+    "fact_production.csv": "e1d3a3727236e4042588b4b4ef888e5e462c0aa7eec131000faae0baf44e7e21",
+    "fact_sales_order.csv": "ef43a27e8872f71b97c293316a6cc5d625471ec6606bee08046b3fe2048c9a13",
+    "mart_monthly_kpi.csv": "bb014b6d9d803737f31c65011cc3a17b7ecd9dd6baa35b7d5776872c47bc745d",
+    "mart_quarterly_kpi.csv": "513ff3aa24bc25a22a7a832b9d3ae46c69cb07d239a5ec824ad0b6c229eb7005"
+  }
+}
