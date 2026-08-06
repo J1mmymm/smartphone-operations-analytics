@@ -8,9 +8,7 @@
 
 本项目以“南湖高新科技有限责任公司”的 14 个专业见习经营回合为背景，将经营流水整理为连续 42 个月的手机生产、销售、库存、履约与现金数据，建立从原始业务表到 Excel 分析、MySQL 数据仓库和 Power BI 管理看板的完整分析链路。
 
-项目面向商业分析/数据分析岗位作品集：重点不是追求复杂算法，而是证明我能够把不完整的经营记录转化为可对账的数据模型，定义清晰指标，用 SQL 和 BI 工具验证假设，并给出可以落地的经营建议。
-
-数据统一描述为“基于专业见习经营流水整理并补全的项目数据”。本项目为个人作品集，不来自小米集团或任何真实企业内部系统，也不包含原始课程工作簿、账号、密码或个人信息。
+项目尝试把经营记录转化为可对账的数据模型，定义清晰指标，用 SQL 和 Power BI 工具验证假设，并给出可以落地的经营建议。
 
 ![Power BI 经营总览](docs/powerbi_overview.png)
 
@@ -32,7 +30,7 @@
 
 ## 2. 业务问题与分析假设
 
-管理层需要回答五类问题：
+本项目主要回答以下五个问题：
 
 1. 销售增长是否来自可持续的产品、渠道与区域组合？
 2. 增长是否牺牲了价格、毛利率或交付质量？
@@ -40,7 +38,7 @@
 4. 库存是在保障履约，还是形成低效资金占用？
 5. 账面上“累计净现金为正”是否掩盖了阶段性的现金断点？
 
-分析前没有预设结论，而是建立四个可证伪假设：
+进行具体分析前建立四个假设：
 
 | 假设 | 观察指标 | 判断结果 |
 |---|---|---|
@@ -182,7 +180,8 @@ erDiagram
 
 ## 7. MySQL 实现
 
-SQL 文件按依赖顺序拆分，便于面试时逐层讲解：
+SQL 文件按依赖顺序拆分
+具体目录如下：
 
 | 文件 | 作用 |
 |---|---|
@@ -218,7 +217,7 @@ FROM quarterly q
 JOIN cash c USING (quarter_seq);
 ```
 
-实际在本机 MySQL 8.0.46 中完成建库、导入和全量查询测试。视图行数、控制总额和窗口计算均通过。
+项目在 MySQL 8.0.46 中完成。
 
 ## 8. Power BI 实现
 
@@ -247,11 +246,8 @@ Power BI Desktop 使用 MySQL 原生连接器的 Import 模式。微软文档说
 
 ![Power BI 供应链与现金](docs/powerbi_supply_cash.png)
 
-### 8.2 Power BI 质量检查
+### 8.2 Power BI 报表的进一步检查
 
-- 使用 Microsoft `powerbi-report-author` 校验 PBIR：0 error；仅有 1 条因在线 `visualContainer/2.11.0` Schema 暂不可达产生的 schema-fetch warning。
-- 使用 Desktop Bridge 真实打开 PBIP、重新加载页面并逐页截图。
-- 逐页检查标题、筛选器、卡片、图表、表格、颜色、留白和截断。
 - Power BI、Excel、MySQL 的销售额、毛利率、履约率、产能利用率和现金余额相互对账。
 - Authoring workflow 参考 [Microsoft Power BI authoring skill](https://github.com/microsoft/skills-for-fabric/blob/main/plugins/powerbi-authoring/skills/powerbi-report-authoring/SKILL.md)。
 
@@ -334,10 +330,8 @@ Get-Content -Raw sql/05_business_analysis.sql |
 2. 按微软要求安装 Oracle MySQL Connector/NET，安装后重启 Desktop。
 3. 确保 `nanhu_mobile_analytics` 已导入本机 MySQL。
 4. 打开 `powerbi/SmartphoneOperationsAnalytics.pbip`。
-5. 在首次刷新时选择 Database authentication，输入本机 MySQL 用户名和密码；连接级别选择 `127.0.0.1:3306`。
+5. 在首次刷新时选择 Database authentication，输入本机 MySQL 用户名和密码；
 6. 刷新模型并检查三页报表。
-
-PBIP 中只包含服务器 `127.0.0.1:3306` 和数据库名，不包含用户名或密码。
 
 ## 12. 仓库结构
 
@@ -365,26 +359,6 @@ smartphone-operations-analytics/
 └─ README.md
 ```
 
-## 13. 简历三条项目描述
-
-- 基于 14 个经营季度的手机业务流水，使用固定种子补全 42 个月、4 个 SKU、3 类渠道、4 个区域及 327 笔订单数据，建立销售—生产—库存—现金星型模型；对账销售回款 3,287.02 万元、现金流入/流出及 14 季现金勾稽，质量检查全部通过。
-- 使用 MySQL 8.0 搭建 `nanhu_mobile_analytics` 数据库与 5 个业务视图，通过多表 JOIN、CTE、窗口函数、`LAG`、排名和 CASE 分层分析增长、产品/渠道贡献、履约、库存与现金风险；识别 Q13 期末现金仅 0.32 万元及 Q13/Q14 产能利用率 95.33%/91.39%。
-- 使用 Excel 构建 19 页可审计分析工作簿，并以 Power BI PBIP/TMDL + 23 个 DAX 指标交付三页交互式看板；发现仓储/缺货假设不成立，但产能弹性、现金时点和产品渠道集中风险成立，据此提出滚动 S&OP、13 周现金预测和 SKU 组合优化建议。
-
-更完整版本见 [`docs/resume_bullets.md`](docs/resume_bullets.md)。
-
-## 14. 面试讲解提纲
-
-推荐按“业务问题 → 数据可信度 → 工具实现 → 关键发现 → 建议 → 局限”的顺序，在 3 分钟内讲完：
-
-1. 背景：专业见习中经营手机公司，但原始流水只能回答“钱去了哪里”，不能联动解释销售、供给与现金。
-2. 处理：先锁定 6 个控制总额，再补全订单、产能和库存明细，所有拆分必须回到总额。
-3. 工具：Excel 做可审计计算，MySQL 做可复用数据模型与 SQL 诊断，Power BI 做管理层监控和交互切片。
-4. 发现：增长推高产能利用率，现金在 Q13 接近断点；但无缺货、仓储不满，所以结论是“部分支持”，不是为了简历效果强行证明原假设。
-5. 行动：用 S&OP、13 周现金预测和 SKU/渠道组合优化解决真正问题。
-6. 局限：订单与 SKU 细分来自经营流水的规则化补全，没有客户级回款、供应商账期和营销曝光数据，因此不做客户留存或营销因果推断。
-
-完整问答与追问准备见 [`docs/interview_guide.md`](docs/interview_guide.md)。
 
 ## License
 
