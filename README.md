@@ -4,7 +4,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Data QA](https://img.shields.io/badge/Data%20QA-PASS-2D7D46.svg)](data/quality/qa_report.json)
-[![PBIR validation](https://img.shields.io/badge/PBIR-0%20errors%20%7C%201%20schema%20warning-F56600.svg)](powerbi/SmartphoneOperationsAnalytics.Report)
 
 本项目以“南湖高新科技有限责任公司”的 14 个专业见习经营回合为背景，将经营流水整理为连续 42 个月的手机生产、销售、库存、履约与现金数据，建立从原始业务表到 Excel 分析、MySQL 数据仓库和 Power BI 管理看板的完整分析链路。
 
