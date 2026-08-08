@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Data QA](https://img.shields.io/badge/Data%20QA-PASS-2D7D46.svg)](data/quality/qa_report.json)
 
-本项目以专业见习模拟经营中“南湖高新科技有限责任公司”的 14 个经营季度为背景，将经营流水整理为连续 42 个月的手机生产、销售、库存、履约与现金数据，建立从原始业务表到 Excel 分析、MySQL 数据仓库和 Power BI 管理看板的完整分析链路。
+本项目以专业见习模拟经营中“南湖高新科技有限责任公司”的 14 个经营季度为背景，将经营流水整理为连续 42 个月的手机生产、销售、库存、履约与现金数据，形成从原始业务表到 Excel 分析、MySQL 数据仓库和 Power BI 管理看板的完整分析。
 
 项目尝试把经营记录转化为可对账的数据模型，定义清晰指标，用 SQL 和 Power BI 工具验证假设，并给出可以落地的经营建议。
 
